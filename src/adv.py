@@ -53,7 +53,7 @@ room['treasure'].s_to = room['narrow']
 # print(room['outside'].name)
 
 # Make a new player object that is currently in the 'outside' room.
-player_1 = Player('player_1',room['outside'].name, [items["candle"].name])
+player_1 = Player('player_1',room['outside'])
 
 # print(f'players current room: {player_1.current_room}')
 # print(f'description for current room: {room["outside"].description}')
@@ -70,7 +70,6 @@ player_1 = Player('player_1',room['outside'].name, [items["candle"].name])
 #
 # If the user enters "q", quit the game.
 
-# direction_choices = ['n', 's', 'e', 'w']
 def check_items(item_array):
     if len(item_array) == 0:
         print(f'You look around but you do not find anything')
@@ -79,49 +78,61 @@ def check_items(item_array):
         for x in item_array:
             print(f'{x}')
 
+
+def check_command(command):
+    if len(command) == 0:
+        pass
+    elif len(command) == 1:
+        pass
+    # elif command[0] == 'take' or 'get':
+    #     print('drop stopping here?????')
+    #     player_1.on_take(command)
+    elif command[0] == 'drop':
+        print("checking to see if drop gets here!!")
+        player_1.on_drop(command)
+        print("checking to see if drop gets here after calling the drop function!!")
+    else:
+         print('Not a valid command.')
+
+
 while True:
-    print(f'{player_1.current_room}')
-
-    if player_1.current_room == room["outside"].name:
-        print(f'{room["outside"].description}')
-        check_items(room["outside"].items)
-    elif player_1.current_room == room["foyer"].name:
-        print(f'{room["foyer"].description}')
-        check_items(room["foyer"].items)
-    elif player_1.current_room == room["overlook"].name:
-        print(f'{room["overlook"].description}')
-        check_items(room["overlook"].items)
-    elif player_1.current_room == room["narrow"].name:
-        print(f'{room["narrow"].description}')
-        check_items(room["narrow"].items)
-    elif player_1.current_room == room["treasure"].name:
-        print(f'{room["treasure"].description}')
-        check_items(room["treasure"].items)
+    print(f'{player_1.current_room.name}')
+    print(f'{player_1.current_room.description}')
+    check_items(player_1.current_room.items)
     
-    player_input = input("chose your direction wisely: ")
+    # item_input_choice = input("take/drop item from/in the room (must be only one space between command and item): ").split(' ')
+    
+    player_input = input("--> ").split(' ')
+    check_command(player_input)
+    # print(f'command: {item_input_choice[0]} and item: {item_input_choice[1]}')
 
-    if player_input == 'n':
-        if player_1.current_room == room["outside"].name:
-            player_1.current_room = room["outside"].n_to.name
-        elif player_1.current_room == room["foyer"].name:
-            player_1.current_room = room["foyer"].n_to.name
-        elif player_1.current_room == room["narrow"].name:
-            player_1.current_room = room["narrow"].n_to.name
-        elif player_1.current_room == room["overlook"].name:
+    if player_input[0] == 'n':
+        if player_1.current_room.n_to is None:
             print("you cannot go that way")
-    elif player_input == 's':
-        if player_1.current_room == room["foyer"].name:
-            player_1.current_room = room["foyer"].s_to.name
-        elif player_1.current_room == room["overlook"].name:
-            player_1.current_room = room["overlook"].s_to.name
-        elif player_1.current_room == room["treasure"].name:
-            player_1.current_room = room["treasure"].s_to.name
-    elif player_input == 'e':
-        if player_1.current_room == room["foyer"].name:
-             player_1.current_room = room["foyer"].e_to.name
-    elif player_input == 'w':
-        if player_1.current_room == room["narrow"].name:
-            player_1.current_room = room["narrow"].w_to.name
-    elif player_input == 'q':
+        else:
+            player_1.current_room = player_1.current_room.n_to
+    elif player_input[0] == 's':
+        if player_1.current_room.s_to is None:
+            print("you cannot go that way")
+        else:
+            player_1.current_room = player_1.current_room.s_to
+    elif player_input[0] == 'e':
+        if player_1.current_room.e_to is None:
+            print("you cannot go that way")
+        else:
+            player_1.current_room = player_1.current_room.e_to
+    elif player_input[0] == 'w':
+        if player_1.current_room.w_to is None:
+            print("you cannot go that way")
+        else:
+            player_1.current_room = player_1.current_room.w_to
+    # elif player_input[0] == 'i' or 'inventory':
+    #     print("items in your inventory: ")
+    #     if len(player_1.items) == 0:
+    #         print('You have no items in your inventory')
+    #     else:
+    #         for it in player_1.items:
+    #             print(f'{it}')
+    elif player_input[0] == 'q':
         print('See you next time!')
         break
