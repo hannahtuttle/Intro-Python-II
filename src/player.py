@@ -17,6 +17,7 @@ class Player:
                 print(f'{command[1]} is not in this room!')
     
     def on_drop(self, comm):
+        print(comm)
         for it in self.items:
             if it == comm[1]:
                 self.items.remove(comm[1])

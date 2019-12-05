@@ -84,9 +84,10 @@ def check_command(command):
         pass
     elif len(command) == 1:
         pass
-    # elif command[0] == 'take' or 'get':
-    #     print('drop stopping here?????')
-    #     player_1.on_take(command)
+    elif command[0] == 'take' or command[0] == 'get':
+        print(command)
+        print('drop stopping here?????')
+        player_1.on_take(command)
     elif command[0] == 'drop':
         print("checking to see if drop gets here!!")
         player_1.on_drop(command)
@@ -126,13 +127,13 @@ while True:
             print("you cannot go that way")
         else:
             player_1.current_room = player_1.current_room.w_to
-    # elif player_input[0] == 'i' or 'inventory':
-    #     print("items in your inventory: ")
-    #     if len(player_1.items) == 0:
-    #         print('You have no items in your inventory')
-    #     else:
-    #         for it in player_1.items:
-    #             print(f'{it}')
+    elif player_input[0] == 'i' or player_input[0] == 'inventory':
+        print("items in your inventory: ")
+        if len(player_1.items) == 0:
+            print('You have no items in your inventory')
+        else:
+            for it in player_1.items:
+                print(f'{it}')
     elif player_input[0] == 'q':
         print('See you next time!')
         break
