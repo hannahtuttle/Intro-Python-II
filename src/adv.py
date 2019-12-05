@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -36,8 +37,14 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+# print(room['outside'].name)
 
 # Make a new player object that is currently in the 'outside' room.
+player_1 = Player('player_1',room['outside'].name)
+
+print(f'players current room: {player_1.current_room}')
+# print(f'description for current room: {room[player_1.current_room].description}')
+
 
 # Write a loop that:
 #
@@ -49,3 +56,23 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+direction_choices = ['n', 's', 'e', 'w']
+while True:
+    print(f'{player_1[current_room].name}')
+    if player_1[current_room]. == room['outside'].name:
+        print(f'{room['outside'].description}')
+    elif player_1[current_room] == room['foyer'].name:
+        print(f'{room['foyer'].description}')
+    elif player_1[current_room].name == room['overlook'].name:
+        print(f'{room['overlook'].description}')
+    elif player_1[current_room] == room['narrow'].name:
+        print(f'{room['narrow'].description}')
+    elif player_1[current_room] == room['treasure'].name:
+        print(f'{room['treasure'].description}')
+    player_unput = input("chose your direction wisely: ")
+    if player_input == 'n':
+        player_1.name = 
+    elif player_input == 's':
+    elif player_input == 'e':
+    elif player_input == 'w':
